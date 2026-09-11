@@ -7,3 +7,10 @@ STREAMLIT_SERVER_ADDRESS = "0.0.0.0"
 
 [nix]
 channels = ["stable-24_05"]
+
+# Sección aparte para Deploy/Publish (Autoscale) — el botón Run no la usa,
+# así que sin esto Replit publica el build pero no sabe cómo arrancarlo.
+[deployment]
+deploymentTarget = "cloudrun"
+build = ["sh", "-c", "pip install -r requirements.txt"]
+run = ["sh", "-c", "streamlit run app.py --server.port 5000 --server.address 0.0.0.0 --server.headless true"]
